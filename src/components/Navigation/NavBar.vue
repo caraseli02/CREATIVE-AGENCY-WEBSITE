@@ -9,10 +9,19 @@
       class="navigation"
     >
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="work.html">Work</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li
+          v-for="link in links"
+          :key="link"
+          
+          @click="menuState = !menuState"
+        >
+          <router-link
+            :class="$route.name === link ? 'activeLink' : ''"
+            :to="{ name: link }"
+          >
+            {{ link }}
+          </router-link>
+        </li>
       </ul>
       <div class="social-bar">
         <ul>
@@ -70,6 +79,11 @@ export default defineComponent({
   setup() {
     return {
       menuState,
+    };
+  },
+  data() {
+    return {
+      links: ["Home", "Work", "Services", "Contact"],
     };
   },
 });
@@ -163,7 +177,6 @@ header {
 
 .navigation ul li a {
   font-size: 2.2rem;
-  color: #111;
   text-decoration: none;
   font-weight: 300;
 }
@@ -192,5 +205,9 @@ header {
   position: absolute;
   bottom: 20px;
   transform: scale(0.5);
+}
+
+.activeLink {
+  color: red;
 }
 </style>

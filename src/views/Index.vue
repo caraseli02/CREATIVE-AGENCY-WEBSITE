@@ -1,11 +1,9 @@
 <template>
   <section
-    data-barba="container"
-    data-barba-namespace="home"
     class="home animated-content"
   >
     <img
-      src="images/home-img.jpg"
+      :src="heroImg"
       class="home-img"
       alt=""
     >
@@ -35,6 +33,11 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   components: {
     
+  },
+  data() {
+    return {
+      heroImg: "src/assets/images/home-img.jpg",
+    }
   },
 })
 </script>

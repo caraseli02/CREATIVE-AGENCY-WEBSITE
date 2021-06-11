@@ -32,7 +32,6 @@ body {
 
 a {
   text-decoration: none;
-  color: black;
 }
 
 header {
@@ -159,12 +158,10 @@ section.home {
   font-weight: 300;
   position: relative;
   font-weight: bold;
-  color: red;
 }
 
 .navigation ul li a {
   font-size: 2.2rem;
-  color: #111;
   text-decoration: none;
   font-weight: 300;
 }
