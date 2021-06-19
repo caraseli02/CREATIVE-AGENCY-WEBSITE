@@ -1,9 +1,13 @@
 <template>
-  <div class="">
+  <div class="sizer">
     <NavBar />
-    <div class="">
-      <router-view />
-    </div>
+    <router-view v-slot="{ Component }">
+      <transition
+        name="slide-right"
+      >
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
@@ -18,11 +22,6 @@ export default defineComponent({
 
 <style>
 /* BASE STYLES*/
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 html,
 body {
@@ -30,166 +29,21 @@ body {
   color: #111;
 }
 
+@media screen and (min-width: 1600px) {
+  body {
+    background: rgb(102,166,255);
+background: linear-gradient(90deg, rgba(102,166,255,1) 0%, rgba(250,250,250,1) 15%, rgba(250,250,250,1) 85%, rgba(102,166,255,1) 100%);
+  }
+}
+
 a {
   text-decoration: none;
 }
 
-header {
-  height: 60px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 0.5rem;
-}
-
-h1 {
-  font-size: 30px;
-  font-weight: 500;
-}
-
-p {
-  margin: 20px 0 10px;
-  font-size: 1.1rem;
-}
-
-section {
-  flex-direction: column;
-  margin-top: 0;
-  display: flex;
-  height: calc(100vh - 120px);
-  align-items: center;
-  padding: 100px;
-  margin-top: 60px;
-}
-
-section.home {
-  flex-direction: row;
-  margin-top: 0;
-}
-
-/*BUTTON*/
-.btn {
-  cursor: pointer;
-  display: inline-block;
-  background: var(--primary-color);
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin: 20px 0;
-  border: 0;
-}
-
-.btn:hover {
-  transform: scale(0.98);
-}
-
-.logo {
-  margin-left: 1.5rem;
-  font-size: 2rem;
-  font-weight: 700;
-  z-index: 20;
-}
-/*  TOOGLE */
-.toggle {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 60px;
-  height: 60px;
-  background: var(--primary-color) url(/images/menu.png);
-  background-size: 30px;
-  background-repeat: no-repeat;
-  background-position: center;
-  z-index: 20;
-  cursor: pointer;
-}
-
-.toggle.active {
-  background: var(--primary-color) url(/images/close.png);
-  background-size: 25px;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-/*NAVIGATION*/
-.navigation {
-  position: fixed;
-  top: 0;
-  left: 100%;
-  width: 100%;
-  height: 20%;
-  background-color: #fff;
-  z-index: 15;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 0%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.35s, visibility 0.35s, height 0.35s;
-  overflow: hidden;
-}
-
-.navigation.active {
-  left: 0;
-  opacity: 0.9;
-  visibility: visible;
-  height: 100%;
-}
-
-.navigation ul {
-  position: relative;
-}
-
-.navigation ul li {
-  position: relative;
-  list-style: none;
-  text-align: center;
-  -webkit-animation: fadeInRight 0.5s ease forwards;
-  animation: fadeInRight 0.5s ease forwards;
-  -webkit-animation-delay: 0.35s;
-  animation-delay: 0.35s;
-}
-
-.navigation .actualRoute {
-  font-size: 2.2rem;
-  color: #111;
-  text-decoration: none;
-  font-weight: 300;
-  position: relative;
-  font-weight: bold;
-}
-
-.navigation ul li a {
-  font-size: 2.2rem;
-  text-decoration: none;
-  font-weight: 300;
-}
-
-.navigation ul li a:hover {
-  color: var(--primary-color);
-}
-
-.navigation .social-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 60px;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.navigation .social-bar {
-  display: inline-block;
-  transform: scale(0.5);
-}
-
-.navigation .email-icon {
-  position: absolute;
-  bottom: 20px;
-  transform: scale(0.5);
+.sizer{
+  max-width: 1366px;
+  margin: 0 auto;
+  
 }
 
 /*HOMEPAGE*/
@@ -293,5 +147,33 @@ section.home {
   padding: 5px 15px;
 }
 
-/* CONTACT*/
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-left-enter-active {
+  transition: all 0.5s ease-out, 1.3s;
+  animation-delay: 2.5s;
+}
+
+.slide-left-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.slide-right-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.slide-right-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
 </style>
