@@ -3,3 +3,25 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@layer utilities {
+  .animation-delay-05 {
+    animation-delay: 0.5s;
+  }
+  .animation-delay-2 {
+    animation-delay: 2s;
+  }
+  .animation-delay-4 {
+    animation-delay: 4s;
+  }
+}
+
+@layer components {
+    .glass {
+      @apply glassmorphism-25;
+    }
+
+    .content-container {
+      height: calc(100vh - 54px);
+    }
+}
