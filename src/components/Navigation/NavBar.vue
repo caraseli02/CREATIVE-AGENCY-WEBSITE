@@ -97,6 +97,7 @@ const navigation = [
   { name: "Work" },
   { name: "Services" },
   { name: "Contact" },
+  { name: "Feedback" },
 ];
 export default {
   components: {
